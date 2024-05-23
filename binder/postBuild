@@ -1,0 +1,22 @@
+cd /tmp
+
+apt-get update && apt-get install -y \
+    build-essential \
+    ghostscript
+
+wget https://mirrors.sarata.com/gnu/gsl/gsl-2.7.tar.gz && \
+    tar -zxvf gsl-2.7.tar.gz && \
+    cd gsl-2.7 && \
+    ./configure && \
+    make -j 8 && \
+    make install && \
+    cd .. && \
+    rm -rf gsl-2.7.tar.gz gsl-2.7
+
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> /root/.bashrc && \
+echo "export CFLAGS="-I/usr/local/include"" >> /root/.bashrc && \
+echo "export LDFLAGS="-L/usr/local/lib"" >> /root/.bashrc && \
+echo "conda activate ClusteredNetwork_pub" >> ~/.bashrc
+
+mkdir /app
+cd /app
